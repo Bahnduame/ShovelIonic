@@ -1,0 +1,32 @@
+<ion-view title="Tell me more" hide-back-button="true">
+
+    <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+    </ion-nav-bar>
+  <ion-content has-header="true" has-tabs="true" padding="true">
+
+
+    <form ng-submit="updateUser()">
+
+        <div class="list">
+
+            <label class="item item-input">
+                <input type="tel" placeholder="Name" >
+            </label>
+
+            <label class="item item-input">
+                <input type="email" placeholder="Email">
+            </label>
+
+            <label class="item item-input">
+                <input type="tel" placeholder="Phone Number" ng-model="phoneNum.val">
+            </label>
+        </div>
+
+        <div>
+            <button type="submit" class="button normalButton"><span class="buttonFont">Confirm</span></button>
+        </div>
+
+    </form>
+
+  </ion-content>
+</ion-view>

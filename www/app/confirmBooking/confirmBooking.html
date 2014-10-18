@@ -1,0 +1,8 @@
+<ion-view name="main.confirmBooking" title="'Confirm Booking'" hide-back-button="false">
+  <ion-content has-header="true" has-tabs="true" padding="true">
+    {{dataToConfirm}}
+    <button class="button button-full button-outline button-positive" ng-click="goToAddress()">address</button>
+    <button class="button button-full button-outline button-positive" ng-click="goToStripe()">stripe</button>
+    <button class="button normalButton" ng-click="confirm()"><span class="buttonFont">Confirm</span></button>
+  </ion-content>
+</ion-view>

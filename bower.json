@@ -1,0 +1,14 @@
+{
+  "name": "shovel",
+  "private": "true",
+  "devDependencies": {
+    "ionic": "driftyco/ionic-bower#1.0.0-beta.13"
+  },
+  "resolutions": {
+    "angular": "~1.2.17"
+  },
+  "dependencies": {
+    "ngCordova": "~0.1.4-alpha",
+    "angular-google-maps": "~2.0.1"
+  }
+}

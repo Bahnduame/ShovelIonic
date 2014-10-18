@@ -1,0 +1,34 @@
+<ion-view title="Shovel me where?" hide-back-button="true">
+  <ion-content has-header="true" has-tabs="false" padding="false">
+    <form ng-submit="confirmAddress()">
+
+        <div class="list">
+            <label class="item item-input">
+                <input placeholder="Street Address" type="text" ng-model="address.street">
+            </label>
+
+            <label class="item item-input">
+                <input placeholder="Apt or Suite#" type="text" ng-model="address.apt">
+            </label>
+
+           <label class="item item-input">
+                <input placeholder="City" type="text" ng-model="address.city">
+            </label>
+
+            <label class="item item-input">
+                <input placeholder="State" type="text" ng-model="address.state">
+            </label>
+
+            <label class="item item-input">
+                <input placeholder="Zip Code" type="text" ng-model="address.zip">
+            </label>
+        </ion-list>
+        </div>
+
+        <div class="padding">
+            <button type="submit" class="button normalButton"><span class="buttonFont">Confirm</span></button>
+        </div>
+    </form>
+
+  </ion-content>
+</ion-view>

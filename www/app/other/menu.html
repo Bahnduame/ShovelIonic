@@ -1,0 +1,42 @@
+<ion-side-menus>
+
+  <ion-pane ion-side-menu-content>
+    <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+      <ion-nav-back-button class="button-clear"><i class="icon ion-ios7-arrow-back"></i> Back</ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
+  </ion-pane>
+
+  <ion-side-menu side="left">
+    <header class="bar bar-header bar-stable">
+      <h1 class="title">Left</h1>
+    </header>
+    <ion-content class="has-header">
+      <ion-list>
+
+            <ion-item ng-click="goToAppts">
+                Appointments
+            </ion-item>
+
+            <ion-item ng-click="goToSettings">
+                Settings
+            </ion-item>
+
+            <ion-item >
+              <a class="item" href="#" onclick="window.open('http://learn.fullstackacademy.com/#/help_tickets', '_system', 'location=yes'); return false;">
+                support
+               </a>
+            </ion-item>
+
+            <a class="item" href="#" onclick="window.open('http://learn.fullstackacademy.com/#/help_tickets', '_system', 'location=yes'); return false;">
+              <ion-item>
+                  about
+              </ion-item>
+            </a>
+
+        </ion-list>
+        <button class="button button-outline button-negative" ng-click="logout()">Logout</button>
+        <button class="button button-outline button-negative" ng-click="goToBooking()">Book Now</button>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

@@ -1,0 +1,25 @@
+<ion-view title="'Review'" hide-back-button="true">
+  <ion-content has-header="true" has-tabs="true" padding="true">
+ <!--    <li ng-repeat="Star in [1,2,3,4,5]">
+      <div ng-switch="store.Rating >= Star">
+          <div ng-switch-when="true">
+              <img src="~/Images/star.png" class="star" />
+          </div>
+          <div ng-switch-when="false">
+              <div ng-switch="store.Rating > (Star-1)">
+                  <div ng-switch-when="true">
+                      <img src="~/Images/star_half.png" class="star" />
+                  </div>
+                  <div ng-switch-when="false">
+                      <img src="~/Images/star_gray.png" class="star" />
+                  </div>
+              </div>
+          </div>
+      </div>
+  </li> -->
+      <textarea ng-model="review.body" rows="12">
+      </textarea>
+      <button class="button button-full button-positive" ng-click="submitReview()">Submit Review</button>
+      <button class="button button-full button-positive" ng-click="logout()">Test</button>
+  </ion-content>
+</ion-view>
