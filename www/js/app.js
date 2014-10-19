@@ -61,24 +61,6 @@ angular.module('starter', ['ionic','firebase','starter.controllers','ngCordova',
         }
       }
     })
-    .state('app.stylistList', {
-      url: "/stylistList",
-      views: {
-        'menuContent' :{
-          templateUrl: 'app/stylistList/stylistList.html',
-          controller: 'StylistListCtrl'
-        }
-      }
-    })
-    .state('app.stylistProfile', {
-      url: "/stylistProfile",
-      views: {
-        'menuContent' :{
-          templateUrl: 'app/stylistProfile/stylistProfile.html',
-          controller: 'StylistProfileCtrl'
-        }
-      }
-    })
     .state('app.confirmBooking', {
       url: "/confirmBooking",
       views: {

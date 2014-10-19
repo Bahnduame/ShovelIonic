@@ -11,7 +11,7 @@ angular.module('starter')
 
                 var tpUser = userOAuthData.thirdPartyUserData;
                 userData.setID(userOAuthData.uid);
-                console.log('userData ID after OAuth: ',userData.getID())
+                userData.setName(tpUser.first_name || tpUser.given_name);
 
                 // grabs user info from firebase
                 ref.child('users').child(userOAuthData.uid).once('value',function(snapshot){
@@ -51,12 +51,14 @@ angular.module('starter')
                     }
 
                     // if we are missing phone number, go to addUserData page
-                    else if(!user || user.phone == null ||  user.phone== undefined){
+                    else if(!user || !user.phone || !user.email){
                         $state.go('addUserData');
                     }
 
                   // otherwise, go to address page
-                  else{
+                  else if(user.shovler){
+                    $state.go('app.shovlerDashboard')
+                  }else{
                     $state.go('app.services');
                   }
 

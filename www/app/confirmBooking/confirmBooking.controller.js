@@ -13,6 +13,7 @@ angular.module('starter')
     $scope.brand = obj.brand;
   });
 
+  apptData.setClient(userData.getName())
 
   $scope.goToStripe = function(){
     // sends user to add/change credit card information
@@ -34,7 +35,7 @@ angular.module('starter')
       console.log(appointment);
       app.apptID=appointment.path.o[1];
       app.status="booked";
-      app.stylistID = apptData.getStylistID();
+      app.client = apptData.getClient();
 
       //upon successful push to firebase, push apptID and status to user table as well
       ref.child('users').child(userData.getID()).child('appointments').push(app, function(){
