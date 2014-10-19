@@ -9,10 +9,10 @@ angular.module('starter')
           console.log("error: " + response.error)
 
         } else {
+          // customer token is returned by Stripe
           var token = response.id;
-          console.log("token: " + token);
 
-          // got stripe token, now send it to express server for processing
+          // now send it to express server for processing
           $http.post(paulServer+'/', {stripeToken: token, userId: userData.getID()})
             .success(function(data,status,headers,config){
 

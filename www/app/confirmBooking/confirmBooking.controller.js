@@ -1,8 +1,21 @@
 angular.module('starter')
 .controller('ConfirmBookingCtrl',function($rootScope, $scope, $state, $http, userData, apptData){
+  
+  // cost of cleaning a driveway
+  $scope.amount = 35;
+
+  // set dataToConfirm = appt data for viewing
   $scope.dataToConfirm = apptData.getAppointmentData();
 
+  // check if user has stored cc information, if yes get the brand & last 4 digits
+  $http.get(paulServer+'/', {userID: userID}).success(function(obj){
+    $scope.last = obj.last;
+    $scope.brand = obj.brand;
+  });
+
+
   $scope.goToStripe = function(){
+    // sends user to add/change credit card information
     $state.go("app.stripe");
   };
 
