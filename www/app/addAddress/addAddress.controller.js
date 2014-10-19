@@ -14,15 +14,7 @@ angular.module('starter')
 		//take in address and userID from input fields and populate apptData
 		apptData.setAddress($scope.address);
 		apptData.setUserID(userData.getID());
-
-		//if there is a stylist already associated to the apptData then go to confirm booking
-		if(apptData.getStylistID() !== ''){
-			$state.go('app.confirmBooking')
-
-		//otherwise go through booking process
-		}else{
-			$state.go('app.confirmBooking');
-		}
+		$state.go('app.confirmBooking');
 	};
 
 		//get location and  populate address fields with best guess from google

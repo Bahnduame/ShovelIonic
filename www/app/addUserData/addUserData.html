@@ -2,25 +2,30 @@
 
     <ion-nav-bar class="bar-stable nav-title-slide-ios7">
     </ion-nav-bar>
-  <ion-content has-header="true" has-tabs="true" padding="true">
+  <ion-content has-header="true">
 
-
+    <h3>Hi, {{username}} could we get a little more info?</h3>
     <form ng-submit="updateUser()">
 
         <div class="list">
 
             <label class="item item-input">
-                <input type="tel" placeholder="Name" >
+                <input type="email" placeholder="Email" ng-model="addData.email">
             </label>
 
             <label class="item item-input">
-                <input type="email" placeholder="Email">
+                <input type="tel" placeholder="Phone Number" ng-model="addData.phone">
             </label>
 
-            <label class="item item-input">
-                <input type="tel" placeholder="Phone Number" ng-model="phoneNum.val">
-            </label>
+            <div class="item item-checkbox">
+             <label class="checkbox">
+               <input type="checkbox" ng-model= "addData.shovler">
+             </label>
+             I want to Shovel
+            </div>
+
         </div>
+
 
         <div>
             <button type="submit" class="button normalButton"><span class="buttonFont">Confirm</span></button>

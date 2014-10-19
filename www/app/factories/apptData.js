@@ -1,7 +1,6 @@
 angular.module('starter')
 .factory('apptData', function(){
-    var booking = {services:[],
-                    stylistID: '',
+    var booking = { client: '',
                     address: {},
                     userID: '',
                     status:'',
@@ -29,11 +28,11 @@ angular.module('starter')
         getUserID: function(){
             return booking.userID;
         },
-        setStylistID: function(id){
-            booking.stylistID = id;
+        setClient: function(name){
+            booking.client = name;
         },
-        getStylistID: function(){
-            return booking.stylistID;
+        getClient: function(){
+            return booking.client;
         },
         setStatus: function(stat){
             booking.status = stat;

@@ -1,7 +1,7 @@
 angular.module('starter')
 .controller('ConfirmBookingCtrl',function($rootScope, $scope, $state, $http, userData, apptData){
   $scope.dataToConfirm = apptData.getAppointmentData();
-
+  apptData.setClient(userData.getName())
   $scope.goToStripe = function(){
     $state.go("app.stripe");
   };
@@ -21,7 +21,7 @@ angular.module('starter')
       console.log(appointment);
       app.apptID=appointment.path.o[1];
       app.status="booked";
-      app.stylistID = apptData.getStylistID();
+      app.client = apptData.getClient();
 
       //upon successful push to firebase, push apptID and status to user table as well
       ref.child('users').child(userData.getID()).child('appointments').push(app, function(){
