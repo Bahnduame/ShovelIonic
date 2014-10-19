@@ -13,7 +13,6 @@ angular.module('starter')
 	$scope.confirmAddress = function($event){
 		//take in address and userID from input fields and populate apptData
 		apptData.setAddress($scope.address);
-		apptData.setUserID(userData.getID());
 		$state.go('app.confirmBooking');
 	};
 

@@ -1,32 +1,36 @@
 angular.module('starter')
 .factory('apptData', function(){
     var booking = { client: '',
+                    clientID:'',
                     address: {},
-                    userID: '',
+                    shovler: '',
                     status:'',
                     id:''
                     };
     return{
-        getServices: function(){
-            return booking.services;
-        },
-        addService: function(service){
-            booking.services.push(service);
-        },
-        clearServices: function(){
-            booking.services = [];
-        },
         setAddress: function(addr){
             booking.address = addr;
         },
         getAddress: function(){
             return booking.address;
         },
-        setUserID: function(id){
-            booking.userID = id;
+        setShovlerID: function(id){
+            booking.shovler = id;
         },
-        getUserID: function(){
-            return booking.userID;
+        getShovlerID: function(){
+            return booking.shovler;
+        },
+        setClientID: function(id){
+            booking.clientID = id;
+        },
+        getClientID: function(){
+            return booking.clientID;
+        },
+        setID: function(id){
+            booking.id = id;
+        },
+        getID: function(){
+            return booking.id;
         },
         setClient: function(name){
             booking.client = name;
@@ -45,13 +49,6 @@ angular.module('starter')
         },
         setAppointmentData: function(apptData){
             booking=apptData;
-        },
-        getTotalCost: function(){
-            var totalCost = 0;
-            for(var i = 0; i<booking.services.length; i++){
-                totalCost += Number(booking.services[i].price);
-            }
-            return totalCost;
         }
     }
 })

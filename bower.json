@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "ngCordova": "~0.1.4-alpha",
-    "angular-google-maps": "~2.0.1"
+    "angular-google-maps": "~2.0.1",
+    "angular-payments": "*"
   }
 }

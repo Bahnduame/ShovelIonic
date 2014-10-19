@@ -1,8 +1,9 @@
 angular.module('starter')
-.controller('ShovlerConfirmCtrl',function($scope, $firebase, userData,apptData){
+.controller('ShovlerConfirmCtrl',function($scope,$state, $firebase, userData,apptData){
         $scope.appt=apptData.getAppointmentData();
+        $scope.appt.status="accepted"
         console.log("appt data confirm :",$scope.appt);
-
+        var apptID;
 
         $scope.marker = [];
 
@@ -14,8 +15,31 @@ angular.module('starter')
                 latitude: $scope.appt.address.lat,
                 longitude: $scope.appt.address.lon
             },
-            zoom: 15,
-            draggable: false
+            zoom: 18,
+            options:{
+                disableDefaultUI: true,
+                draggable: false,
+            }
         };
 
+        $scope.acceptJob = function(){
+            console.log("in accept job");
+            console.log("appt data :",apptData.getAppointmentData());
+            apptID = apptData.getID();
+
+            console.log("appt ID",apptID);
+            ref.child('appointments').child(apptID).update({status:"accepted"},$scope.addApptToShovler()
+            );
+        };
+
+        $scope.addApptToShovler = function(){
+            ref.child('users').child(userData.getID()).child('appointments').push($scope.appt,$scope.updateClientAppt())
+        }
+
+        $scope.updateClientAppt = function(){
+            ref.child('users').child(apptData.getClientID()).child('appointments').child(apptID).update({status:"accepted"},function(snapshot){
+                            $state.go("app.finishShovel")
+                        }
+                );
+        }
 });
