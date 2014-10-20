@@ -1,5 +1,5 @@
 angular.module('starter')
-.controller('FinishShovelCtrl',function($scope, $firebase, userData,apptData){
+.controller('FinishShovelCtrl',function($scope, $state, $firebase, userData,apptData){
 
         var appt=apptData.getAppointmentData();
         var apptID;
@@ -18,7 +18,7 @@ angular.module('starter')
             ref.child('users').child(apptData.getClientID()).child('appointments').child(apptID)
                 .update({status:"finished"},
                         function(snapshot){
-                            $state.go("app.finishShovel")
+                            $state.go("app.shovlerDashboard")
                         }
                 );
         }

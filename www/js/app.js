@@ -1,5 +1,5 @@
 var ref = new Firebase("https://blazing-inferno-9634.firebaseio.com/");
-var paulServer = 'https://qlfafahpxp.localtunnel.me';
+var paulServer = 'https://rgqediyasf.localtunnel.me';
 // Ionic Starter App
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
@@ -130,6 +130,15 @@ angular.module('starter', ['ionic','firebase','starter.controllers','ngCordova',
         'menuContent' :{
           templateUrl: 'app/finishShovel/finish.html',
           controller: 'FinishShovelCtrl'
+        }
+      }
+    })
+    .state('app.pay', {
+      url: "/pay",
+      views: {
+        'menuContent' :{
+          templateUrl: 'app/customerPay/pay.html',
+          controller: 'PayCtrl'
         }
       }
     });

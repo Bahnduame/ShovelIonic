@@ -1,5 +1,5 @@
 angular.module('starter')
-    .controller('LoginCtrl', function($rootScope, $scope, $firebase, $firebaseSimpleLogin, $state, userData, completedAppt) {
+    .controller('LoginCtrl', function($rootScope, $scope, $firebase, $firebaseSimpleLogin, $state, userData, apptData) {
 
         var auth = $firebaseSimpleLogin(ref);
 
@@ -31,12 +31,14 @@ angular.module('starter')
                     ref.child('users').child(userOAuthData.uid).update(updatedUserData);
 
                     //check for an appt with status of completed
-                    var completedAppointment = false;
                     if(user && user.appointments){
                          for(var key in user.appointments){
-                            if(user.appointments[key].status === 'completed'){
-                                completedAppt.setApptID(key);
-                                completedAppointment = true;
+                            if(user.appointments[key].status === 'accepted' && user.shovler){
+                                apptData.setAppointmentData(user.appointments[key]);
+                                $state.go('app.finishShovel');
+                            }else if(user.appointments[key].status === 'finished' && !user.shovler){
+                                apptData.setAppointmentData(user.appointments[key]);
+                                $state.go('app.pay');
                             }
                         }
                     }
@@ -69,27 +71,24 @@ angular.module('starter')
 
 
         // when login happens, set the User ID
-        $rootScope.$on('$firebaseSimpleLogin:login', function(e, user) {
+    $rootScope.$on('$firebaseSimpleLogin:login', function(e, user) {
         //     console.log("login event: ", user);
 
         //     // create an open listener for changes in appointment status
-            ref.child('users').child(user.uid).child('appointments').startAt()
-                .on('value', function (snapshot) {
-                    var appointments = snapshot.val();
-                    console.log(appointments)
-
-                    // if an appt has completed status
-                    if(appointments){
-                         for(var key in appointments){
-                            if(appointments[key].status === 'completed'){
-                                completedAppt.setApptID(key);
-                                completedAppointment = true;
-                            }
+        ref.child('users').child(userData.getID()).on('value',function(snapshot){
+                user = snapshot.val();
+                if(user && user.appointments){
+                     for(var key in user.appointments){
+                        if(user.appointments[key].status === 'accepted' && user.shovler){
+                            apptData.setAppointmentData(user.appointments[key]);
+                            $state.go('app.finishShovel');
+                        }else if(user.appointments[key].status === 'finished' && !user.shovler){
+                            apptData.setAppointmentData(user.appointments[key]);
+                            $state.go('app.pay');
                         }
                     }
-                }, function (errorObject) {
-                    console.log('The read failed: ' + errorObject.code);
-                })
+                }
+            });
         });
 
 

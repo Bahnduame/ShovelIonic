@@ -33,7 +33,7 @@ angular.module('starter')
         };
 
         $scope.addApptToShovler = function(){
-            ref.child('users').child(userData.getID()).child('appointments').push($scope.appt,$scope.updateClientAppt())
+            ref.child('users').child(userData.getID()).child('appointments').push($scope.appt,$scope.updateClientAppt());
         }
 
         $scope.updateClientAppt = function(){
