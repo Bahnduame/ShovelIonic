@@ -141,6 +141,15 @@ angular.module('starter', ['ionic','firebase','starter.controllers','ngCordova',
           controller: 'PayCtrl'
         }
       }
+    })
+    .state('app.review', {
+      url: "/review",
+      views: {
+        'menuContent' :{
+          templateUrl: 'app/review/review.html',
+          controller: 'ReviewCtrl'
+        }
+      }
     });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');

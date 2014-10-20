@@ -2,7 +2,7 @@ angular.module('starter')
     .controller('LoginCtrl', function($rootScope, $scope, $firebase, $firebaseSimpleLogin, $state, userData, apptData) {
 
         var auth = $firebaseSimpleLogin(ref);
-
+        var userID;
         // When user clicks login
         $scope.login = function(provider) {
             console.log("in login function");
@@ -11,8 +11,7 @@ angular.module('starter')
 
                 var tpUser = userOAuthData.thirdPartyUserData;
                 userData.setID(userOAuthData.uid);
-                userData.setName(tpUser.first_name || tpUser.given_name);
-
+                userID=userOAuthData.uid;
                 // grabs user info from firebase
                 ref.child('users').child(userOAuthData.uid).once('value',function(snapshot){
                     user = snapshot.val();
@@ -27,6 +26,12 @@ angular.module('starter')
                             first:tpUser.first_name || tpUser.given_name,
                             last:tpUser.last_name || tpUser.family_name
                          }
+                         userData.setName(tpUser.first_name || tpUser.given_name);
+                    }else{
+                        userData.setName(user.name.first)
+                    }
+                    if(user.phone){
+                        userData.setPhone(user.phone);
                     }
                     ref.child('users').child(userOAuthData.uid).update(updatedUserData);
 
@@ -73,23 +78,24 @@ angular.module('starter')
         // when login happens, set the User ID
     $rootScope.$on('$firebaseSimpleLogin:login', function(e, user) {
         //     console.log("login event: ", user);
+        console.log( "heyo",userData.getID())
 
         //     // create an open listener for changes in appointment status
-        ref.child('users').child(userData.getID()).on('value',function(snapshot){
-                user = snapshot.val();
-                if(user && user.appointments){
-                     for(var key in user.appointments){
-                        if(user.appointments[key].status === 'accepted' && user.shovler){
-                            apptData.setAppointmentData(user.appointments[key]);
-                            $state.go('app.finishShovel');
-                        }else if(user.appointments[key].status === 'finished' && !user.shovler){
-                            apptData.setAppointmentData(user.appointments[key]);
-                            $state.go('app.pay');
-                        }
+        ref.child('users').child(userID).on('value',function(snapshot){
+            user = snapshot.val();
+            if(user && user.appointments){
+                 for(var key in user.appointments){
+                    if(user.appointments[key].status === 'accepted' && user.shovler){
+                        apptData.setAppointmentData(user.appointments[key]);
+                        $state.go('app.finishShovel');
+                    }else if(user.appointments[key].status === 'finished' && !user.shovler){
+                        apptData.setAppointmentData(user.appointments[key]);
+                        $state.go('app.pay');
                     }
                 }
-            });
+            }
         });
+    });
 
 
   // // when logout happens, clear cookies, and go to login

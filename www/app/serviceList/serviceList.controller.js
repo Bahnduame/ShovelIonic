@@ -5,6 +5,7 @@ angular.module('starter')
   $scope.goToStylists = function(){
     apptData.setClient(userData.getName());
     apptData.setClientID(userData.getID());
+    apptData.setClientPhone(userData.getPhone());
     $state.go('app.address');
   }
 });

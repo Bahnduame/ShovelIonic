@@ -1,19 +1,26 @@
 angular.module('starter')
 .factory('userData', function(){
-    var uid,
-    name;
+    var data = {uid:"",
+            name:"",
+            phone:""}
     return{
         getID: function(){
-            return uid;
+            return data.uid;
         },
         setID: function(id){
-            uid=id;
+            data.uid=id;
         },
         getName: function(){
-            return name;
+            return data.name;
         },
         setName: function(username){
-            name=username;
+            data.name=username;
+        },
+        getPhone: function(){
+            return data.phone;
+        },
+        setPhone: function(pnum){
+            data.phone=pnum;
         }
     }
 })

@@ -5,8 +5,10 @@ angular.module('starter')
         var apptID;
         $scope.finishShovel = function(){
             apptID = apptData.getID();
-            ref.child('appointments').child(apptID).update({status:"finished"},$scope.addApptToShovler()
-            );
+            $http.post(paulServer+'/job',{phone:userData.getPhone(),shovlerName:userData.getName(), clientName: apptData.getClient(), status:"finished"}).success(function(obj){
+                ref.child('appointments').child(apptID).update({status:"finished"},$scope.addApptToShovler()
+                );
+            });
         };
 
         $scope.addApptToShovler = function(){

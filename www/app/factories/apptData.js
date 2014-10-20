@@ -2,29 +2,43 @@ angular.module('starter')
 .factory('apptData', function(){
     var booking = { client: '',
                     clientID:'',
+                    clientPhone:'',
                     address: {},
                     shovler: '',
+                    shovlerID: '',
                     status:'',
                     id:''
                     };
     return{
+         setClientID: function(id){
+            booking.clientID = id;
+        },
+        getClientID: function(){
+            return booking.clientID;
+        },
+         setClientPhone: function(pnum){
+            booking.clientPhone = pnum;
+        },
+        getClientPhone: function(){
+            return booking.clientPhone;
+        },
         setAddress: function(addr){
             booking.address = addr;
         },
         getAddress: function(){
             return booking.address;
         },
-        setShovlerID: function(id){
-            booking.shovler = id;
+        setShovler: function(name){
+            booking.shovler = name;
         },
-        getShovlerID: function(){
+        getShovler: function(){
             return booking.shovler;
         },
-        setClientID: function(id){
-            booking.clientID = id;
+        setShovlerID: function(id){
+            booking.shovlerID = id;
         },
-        getClientID: function(){
-            return booking.clientID;
+        getShovlerID: function(){
+            return booking.shovlerID;
         },
         setID: function(id){
             booking.id = id;

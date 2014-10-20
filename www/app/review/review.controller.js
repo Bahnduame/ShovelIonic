@@ -1,5 +1,5 @@
 angular.module('starter')
-.controller('StylistReviewCtrl',function($rootScope, $scope,$firebaseSimpleLogin, $state){
+.controller('ReviewCtrl',function($rootScope, $scope,$firebaseSimpleLogin, $state){
   $scope.auth = $firebaseSimpleLogin(ref);
   $scope.submitReview = function(){
     var review = {};

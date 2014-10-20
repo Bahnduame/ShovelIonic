@@ -23,13 +23,13 @@ angular.module('starter')
         };
 
         $scope.acceptJob = function(){
-            console.log("in accept job");
-            console.log("appt data :",apptData.getAppointmentData());
+            apptData.setShovlerID(userData.getID());
+            apptData.setShovler(userData.getName());
             apptID = apptData.getID();
-
-            console.log("appt ID",apptID);
-            ref.child('appointments').child(apptID).update({status:"accepted"},$scope.addApptToShovler()
-            );
+            $http.post(paulServer+'/job',{phone:userData.getPhone(),shovlerName:userData.getName(), clientName: apptData.getClient(), status:"accepted"}).success(function(obj){
+                   ref.child('appointments').child(apptID).update({status:"accepted"},$scope.addApptToShovler()
+                    );
+            });
         };
 
         $scope.addApptToShovler = function(){
