@@ -3,9 +3,10 @@
     <ion-nav-bar class="bar-stable nav-title-slide-ios7">
     </ion-nav-bar>
   <ion-content has-header="true">
-    <div class="headerText">
+    <div>
       <h5 class="headerText">Hi, {{username}} could we get a little more info?</h5>
     </div>
+
     <form ng-submit="updateUser()">
 
         <div class="list" style="padding: 30px;">
@@ -27,14 +28,34 @@
              <p>I want to Shovel</p>
             </div>
 
-        </div>
-
-
         <div style="text-align:center">
             <button type="submit" class="button normalButton" ><span class="buttonFont">Confirm</span></button>
         </div>
+      </form>
+    
 
-    </form>
+    <!-- collect bank account information -->    
+    
+    <div ng-show="addData.shovler">
+      <form ng-submit="updateBank()">
+          <div class="list">
+
+            <label class="item item-input">
+                <input type="number"  placeholder="Bank Account #" ng-model="bank.account">
+            </label>
+
+            <label class="item item-input">
+                <input type="number" placeholder="Routing #" ng-model="bank.routing">
+            </label>
+            
+          </div>
+          
+          <div>
+              <button type="submit" class="button normalButton"><span class="buttonFont">Confirm</span></button>
+          </div>
+      
+      </form>
+    </div>
 
   </ion-content>
 </ion-view>
