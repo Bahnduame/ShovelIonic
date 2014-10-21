@@ -1,35 +1,31 @@
 <ion-view title="Payment" hide-back-button="false">
   <ion-nav-buttons side="left">
-    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
   <ion-content has-header="true" has-tabs="true" padding="true">
 
-	  <h2>Stripe</h2>
-
+	  <div class="headerText">
+            <h5>Credit Card</h5>
+        </div>
 	<form stripe-form="handleStripe">
+		<div class="list paddingBox">
+            <label class="item item-input">
+           	      <input placeholder="Card Number" type="text" size="20" ng-model="number" payments-validate="card" payments-type-model="type" payments-format="card"/>
+            </label>
+
+            <label class="item item-input">
+                <input placeholder="cvc" type="text" size="4" ng-model="cvc" payments-validate="cvc" payments-format="cvc"/>
+            </label>
+
+           <label class="item item-input">
+                <input placeholder="MM/YYYY" type="text" size="2" ng-model="expiry" payments-format="expiry" payments-validate="expiry" />
+            </label>
+        </ion-list>
+        </div>
+
+        <div class="padding" style="text-align:center">
+            <button type="submit" class="button normalButton"><span class="buttonFont">Confirm</span></button>
+        </div>
 	  <span class="payment-errors"></span>
-
-	  <div class="form-row">
-	    <label>
-	      <span>Card Number</span>
-	      <input type="text" size="20" ng-model="number" payments-validate="card" payments-type-model="type" payments-format="card"/>
-	    </label>
-	  </div>
-
-	  <div class="form-row">
-	    <label>
-	      <span>CVC</span>
-	      <input type="text" size="4" ng-model="cvc" payments-validate="cvc" payments-format="cvc"/>
-	    </label>
-	  </div>
-
-	  <div class="form-row">
-	    <label>
-	      <span>Expiration (MM/YYYY)</span>
-	      <input type="text" size="2" ng-model="expiry" payments-format="expiry" payments-validate="expiry" />
-	    </label>
-	  </div>
-	  <button type="submit" class="button button-full button-outline button-positive">confirm</button>
 	</form>
 
   </ion-content>

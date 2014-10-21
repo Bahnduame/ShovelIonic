@@ -1,10 +1,9 @@
 <ion-view title="Pay" hide-back-button="false">
       <ion-nav-buttons side="left">
-    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
   <ion-content has-header="true" has-tabs="true" padding="true">
     Amount: {{amount}}
-
+    <input type="text" ng-model="tip.val" placeholder="Tip">
     <button class="button normalButton" ng-click="confirm()"><span class="buttonFont">Confirm</span></button>
   </ion-content>
 </ion-view>

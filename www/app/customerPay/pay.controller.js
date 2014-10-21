@@ -4,15 +4,16 @@ angular.module('starter')
   // cost of cleaning a driveway
   $scope.amount = 35;
   console.log("userdata :",userData.getName());
-
+  $scope.tip = {};
   $scope.confirm = function(){
     var appt=apptData.getAppointmentData();
     console.log("appt",appt);
     console.log('userID',userID.getID());
     console.log('shovlerID',shovlerID);
 
+
           //upon successful update to user, charge user through express server
-      $http.post(paulServer+'/charge', {userId: userID.getID(), shovlerID: appt.getShovlerID(), amount: $scope.amount})
+      $http.post(paulServer+'/charge', {userId: userID.getID(), shovlerID: appt.getShovlerID(), amount: $scope.amount+$scope.tip.val})
         .success(function(data,status,headers,config){
           console.log("http success")
           $state.go('main.confirmBooking');

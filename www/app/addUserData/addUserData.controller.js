@@ -32,11 +32,9 @@ angular.module('starter')
 
     };
 
+
     // get stripe token for bank account information
     $scope.updateBank = function(){
-      
-        console.log("routing: ", $scope.bank.routing);
-        console.log("account: ", $scope.bank.account);
 
         // create token
         Stripe.bankAccount.createToken({
@@ -44,9 +42,15 @@ angular.module('starter')
           routingNumber: $scope.bank.routing,
           accountNumber: $scope.bank.account
         }, function (status, response) {
+
             // response contains id and card, which contains additional card details
             var token = response.id;
-            console.log("TOKEN ", response);
+
+             ref.child('user').push({"phone": $scope.addData.phone, "email":$scope.addData.email, "name":$scope.username},function(){
+                        $state.go('app.shovlerDashboard');
+                  });
+
+            
         });
     }
 

@@ -1,11 +1,12 @@
-<ion-view title="Shovel me where?" hide-back-button="false">
+<ion-view title="Location" hide-back-button="false">
 <ion-nav-buttons side="left">
-    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
   <ion-content has-header="true">
     <form ng-submit="confirmAddress()">
-
-        <div class="list">
+        <div class="headerText">
+            <h5>Where is your driveway?</h5>
+        </div>
+        <div class="list paddingBox">
             <label class="item item-input">
                 <input placeholder="Street Address" type="text" ng-model="address.street">
             </label>
@@ -28,7 +29,7 @@
         </ion-list>
         </div>
 
-        <div class="padding">
+        <div class="padding" style="text-align:center">
             <button type="submit" class="button normalButton"><span class="buttonFont">Confirm</span></button>
         </div>
     </form>
