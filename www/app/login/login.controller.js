@@ -36,19 +36,16 @@ angular.module('starter')
                     ref.child('users').child(userOAuthData.uid).update(updatedUserData);
 
                     var acceptedAndShovler = function(status, isShovler){
-                        return (status === 'accepted');
+                        return (status === 'accepted' && isShovler);
                     }
                     var finishedAndCustomer = function(status, isShovler){
                         return (status === 'finished' && (!isShovler));
-                    }
-                    var bookedAndShovler = function(status, isShovler){
-                        return (status === 'booked' && !isShovler);
                     }
                     var appointmentStatusCheck = function(){
                         for(var key in user.appointments){
                             var shovler = user.shovler;
                             var appStatus = user.appointments[key].status;
-                            if(acceptedAndShovler(shovler,appStatus) || finishedAndCustomer(shovler,appStatus) || bookedAndShovler(shovler,appStatus)){
+                            if(acceptedAndShovler(shovler,appStatus) || finishedAndCustomer(shovler,appStatus)){
                                 return true;
                             }
                         };
@@ -86,9 +83,14 @@ angular.module('starter')
         // create an open listener for changes in appointment status
         ref.child('users').child(user.uid).on('value',function(snapshot){
             user = snapshot.val();
+            console.log(user);
+            userData.setName(user.name.first);
+            userData.setPhone(user.phone);
+            userData.setID(user.id);
             if(user && user.appointments){
                  for(var key in user.appointments){
                     if(user.appointments[key].status === 'accepted' && user.shovler){
+                        console.log("login appt data:",apptData)
                         apptData.setAppointmentData(user.appointments[key]);
                         $state.go('app.finishShovel');
                     }else if(user.appointments[key].status === 'finished' && !user.shovler){

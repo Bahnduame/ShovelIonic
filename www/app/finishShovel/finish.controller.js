@@ -3,8 +3,11 @@ angular.module('starter')
 
         var appt=apptData.getAppointmentData();
         var apptID;
+        console.log("appointment",appt);
+        console.log("userID",userData.getID())
         $scope.finishShovel = function(){
             apptID = apptData.getID();
+            console.log(apptID);
             $http.post(paulServer+'/job',{phone:userData.getPhone(),shovlerName:userData.getName(), clientName: apptData.getClient(), status:"finished"}).success(function(obj){
                 ref.child('appointments').child(apptID).update({status:"finished"},$scope.addApptToShovler()
                 );
