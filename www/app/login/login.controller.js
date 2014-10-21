@@ -39,20 +39,37 @@ angular.module('starter')
                         return (status === 'accepted' && isShovler);
                     }
                     var finishedAndCustomer = function(status, isShovler){
+                        console.log("in if status :",status);
+                            console.log("in if isShovler :",isShovler);
+                            console.log("(status === 'finished' && (!isShovler))")
                         return (status === 'finished' && (!isShovler));
                     }
-                    var appointmentStatusCheck = function(){
+                    // var appointmentStatusCheck = function(){
+                    //     for(var key in user.appointments){
+                    //         var shovler = user.shovler;
+                    //         var appStatus = user.appointments[key].status;
+                    //         if(acceptedAndShovler(shovler,appStatus) || finishedAndCustomer(shovler,appStatus)){
+                    //             return true;
+                    //         }
+                    //     };
+                    //     return false;
+                    // }
+                    //check for an appt with status of completed
+                    if(user && user.appointments){
                         for(var key in user.appointments){
                             var shovler = user.shovler;
                             var appStatus = user.appointments[key].status;
-                            if(acceptedAndShovler(shovler,appStatus) || finishedAndCustomer(shovler,appStatus)){
-                                return true;
+                            console.log("shovler :",shovler);
+                            console.log("appStatus :",appStatus);
+                            if(acceptedAndShovler(shovler,appStatus)){
+                                apptData.setAppointmentData(user.appointments[key]);
+                                 $state.go('app.finishShovel');
+                            }else if(finishedAndCustomer(shovler,appStatus)){
+                                console.log("2")
+                                apptData.setAppointmentData(user.appointments[key]);
+                                $state.go('app.pay');
                             }
-                        };
-                        return false;
-                    }
-                    //check for an appt with status of completed
-                    if(user && user.appointments && appointmentStatusCheck()){
+                        }
 
                     }else{
                             if(user && user.type === 'shovler'){
@@ -81,25 +98,25 @@ angular.module('starter')
         // when login happens, set the User ID
     $rootScope.$on('$firebaseSimpleLogin:login', function(e, user) {
         // create an open listener for changes in appointment status
-        ref.child('users').child(user.uid).on('value',function(snapshot){
-            user = snapshot.val();
-            console.log(user);
-            userData.setName(user.name.first);
-            userData.setPhone(user.phone);
-            userData.setID(user.id);
-            if(user && user.appointments){
-                 for(var key in user.appointments){
-                    if(user.appointments[key].status === 'accepted' && user.shovler){
-                        console.log("login appt data:",apptData)
-                        apptData.setAppointmentData(user.appointments[key]);
-                        $state.go('app.finishShovel');
-                    }else if(user.appointments[key].status === 'finished' && !user.shovler){
-                        apptData.setAppointmentData(user.appointments[key]);
-                        $state.go('app.pay');
-                    }
-                }
-            }
-        });
+        // ref.child('users').child(user.uid).on('value',function(snapshot){
+        //     user = snapshot.val();
+        //     console.log(user);
+        //     userData.setName(user.name.first);
+        //     userData.setPhone(user.phone);
+        //     userData.setID(user.id);
+        //     if(user && user.appointments){
+        //          for(var key in user.appointments){
+        //             if(user.appointments[key].status === 'accepted' && user.shovler){
+        //                 console.log("login appt data:",apptData)
+        //                 apptData.setAppointmentData(user.appointments[key]);
+        //                 $state.go('app.finishShovel');
+        //             }else if(user.appointments[key].status === 'finished' && !user.shovler){
+        //                 apptData.setAppointmentData(user.appointments[key]);
+        //                 $state.go('app.pay');
+        //             }
+        //         }
+        //     }
+        // });
     });
 
 
