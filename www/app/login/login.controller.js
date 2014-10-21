@@ -39,32 +39,16 @@ angular.module('starter')
                         return (status === 'accepted' && isShovler);
                     }
                     var finishedAndCustomer = function(status, isShovler){
-                        console.log("in if status :",status);
-                            console.log("in if isShovler :",isShovler);
-                            console.log("(status === 'finished' && (!isShovler))")
                         return (status === 'finished' && (!isShovler));
                     }
-                    // var appointmentStatusCheck = function(){
-                    //     for(var key in user.appointments){
-                    //         var shovler = user.shovler;
-                    //         var appStatus = user.appointments[key].status;
-                    //         if(acceptedAndShovler(shovler,appStatus) || finishedAndCustomer(shovler,appStatus)){
-                    //             return true;
-                    //         }
-                    //     };
-                    //     return false;
-                    // }
-                    //check for an appt with status of completed
                     if(user && user.appointments){
                         for(var key in user.appointments){
                             var shovler = user.shovler;
                             var appStatus = user.appointments[key].status;
-                            console.log("shovler :",shovler);
-                            console.log("appStatus :",appStatus);
-                            if(acceptedAndShovler(shovler,appStatus)){
+                            if(acceptedAndShovler(appStatus,shovler)){
                                 apptData.setAppointmentData(user.appointments[key]);
                                  $state.go('app.finishShovel');
-                            }else if(finishedAndCustomer(shovler,appStatus)){
+                            }else if(finishedAndCustomer(appStatus,shovler)){
                                 console.log("2")
                                 apptData.setAppointmentData(user.appointments[key]);
                                 $state.go('app.pay');
