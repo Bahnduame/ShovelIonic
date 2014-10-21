@@ -1,7 +1,7 @@
 angular.module('starter')
 .controller('ShovlerDashboardCtrl',function($scope, $state, userData, apptData){
     $scope.appointments= {};
-    ref.child('appointments').once('value',function(snapshot){
+    ref.child('appointments').on('value',function(snapshot){
         var allAppointments = snapshot.val();
         console.log(allAppointments)
          for(var key in allAppointments){

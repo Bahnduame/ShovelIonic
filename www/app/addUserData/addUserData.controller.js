@@ -6,14 +6,18 @@ angular.module('starter')
     console.log("userId at updateUser : ",userData.getID());
       //take updated User Data
       userData.setPhone($scope.addData.phone);
+      if($scope.addData.shovler=== undefined){
+        $scope.addData.shovler=false;
+      }
       ref.child('users').child(userData.getID())
         .update({"phone": $scope.addData.phone, "email":$scope.addData.email, "shovler":$scope.addData.shovler}, function(){
-          //after successful update go to services page
-          if($scope.addData.shovler){
-            $state.go('app.shovlerDashboard');
-          }else{
-            $state.go('app.address');
-          }
+              if($scope.addData.shovler){
+                  ref.child('shovlers').push({"phone": $scope.addData.phone, "email":$scope.addData.email, "name":$scope.username},function(){
+                        $state.go('app.shovlerDashboard');
+                  });
+              }else{
+                $state.go('app.address');
+              }
         });
     };
 

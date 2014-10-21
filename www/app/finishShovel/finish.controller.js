@@ -1,5 +1,5 @@
 angular.module('starter')
-.controller('FinishShovelCtrl',function($scope, $state, $firebase, userData,apptData){
+.controller('FinishShovelCtrl',function($scope, $state, $http, $firebase, userData,apptData){
 
         var appt=apptData.getAppointmentData();
         var apptID;

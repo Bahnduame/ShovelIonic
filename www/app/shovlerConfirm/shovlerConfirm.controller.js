@@ -1,5 +1,5 @@
 angular.module('starter')
-.controller('ShovlerConfirmCtrl',function($scope,$state, $firebase, userData,apptData){
+.controller('ShovlerConfirmCtrl',function($scope,$http, $state, $firebase, userData,apptData){
         $scope.appt=apptData.getAppointmentData();
         $scope.appt.status="accepted"
         console.log("appt data confirm :",$scope.appt);
@@ -23,6 +23,9 @@ angular.module('starter')
         };
 
         $scope.acceptJob = function(){
+            console.log("phone :",userData.getPhone())
+            console.log("client name :",apptData.getClient())
+            console.log("name :",userData.getName())
             apptData.setShovlerID(userData.getID());
             apptData.setShovler(userData.getName());
             apptID = apptData.getID();
@@ -33,11 +36,11 @@ angular.module('starter')
         };
 
         $scope.addApptToShovler = function(){
-            ref.child('users').child(userData.getID()).child('appointments').push($scope.appt,$scope.updateClientAppt());
+            ref.child('users').child(userData.getID()).child('appointments').child(apptID).update($scope.appt,$scope.updateClientAppt());
         }
 
         $scope.updateClientAppt = function(){
-            ref.child('users').child(apptData.getClientID()).child('appointments').child(apptID).update({status:"accepted"},function(snapshot){
+            ref.child('users').child(apptData.getClientID()).child('appointments').child(apptID).update($scope.appt,function(snapshot){
                             $state.go("app.finishShovel")
                         }
                 );

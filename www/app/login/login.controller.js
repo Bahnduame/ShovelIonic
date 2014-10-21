@@ -30,31 +30,30 @@ angular.module('starter')
                     }else{
                         userData.setName(user.name.first)
                     }
-                    if(user.phone){
+                    if(user && user.phone){
                         userData.setPhone(user.phone);
                     }
                     ref.child('users').child(userOAuthData.uid).update(updatedUserData);
 
                     //check for an appt with status of completed
                     if(user && user.appointments){
+                        console.log("user :",user)
                          for(var key in user.appointments){
                             if(user.appointments[key].status === 'accepted' && user.shovler){
                                 apptData.setAppointmentData(user.appointments[key]);
                                 $state.go('app.finishShovel');
-                            }else if(user.appointments[key].status === 'finished' && !user.shovler){
+                            }else if(user.appointments[key].status === 'finished' && (!user.shovler)){
                                 apptData.setAppointmentData(user.appointments[key]);
-                                $state.go('app.pay');
+                                $state.go('app.review')
+                            }else if(user.appointments[key].status === 'booked' && !user.shovler){
+                                $state.go('app.waiting');
                             }
                         }
                     }
 
 
-                    if(user.type === 'shovler'){
+                    if(user && user.type === 'shovler'){
                         $state.go('app.shovlerDashboard');
-                    }
-                    // if appointment has been completed, go to selfie page
-                    else if(completedAppointment){
-                        $state.go('selfie');
                     }
 
                     // if we are missing phone number, go to addUserData page
@@ -77,24 +76,21 @@ angular.module('starter')
 
         // when login happens, set the User ID
     $rootScope.$on('$firebaseSimpleLogin:login', function(e, user) {
-        //     console.log("login event: ", user);
-        console.log( "heyo",userData.getID())
-
-        //     // create an open listener for changes in appointment status
-        ref.child('users').child(userID).on('value',function(snapshot){
-            user = snapshot.val();
-            if(user && user.appointments){
-                 for(var key in user.appointments){
-                    if(user.appointments[key].status === 'accepted' && user.shovler){
-                        apptData.setAppointmentData(user.appointments[key]);
-                        $state.go('app.finishShovel');
-                    }else if(user.appointments[key].status === 'finished' && !user.shovler){
-                        apptData.setAppointmentData(user.appointments[key]);
-                        $state.go('app.pay');
-                    }
-                }
-            }
-        });
+        // //     // create an open listener for changes in appointment status
+        // ref.child('users').child(user.uid).on('value',function(snapshot){
+        //     user = snapshot.val();
+        //     if(user && user.appointments){
+        //          for(var key in user.appointments){
+        //             if(user.appointments[key].status === 'accepted' && user.shovler){
+        //                 apptData.setAppointmentData(user.appointments[key]);
+        //                 $state.go('app.finishShovel');
+        //             }else if(user.appointments[key].status === 'finished' && !user.shovler){
+        //                 apptData.setAppointmentData(user.appointments[key]);
+        //                 $state.go('app.pay');
+        //             }
+        //         }
+        //     }
+        // });
     });
 
 
