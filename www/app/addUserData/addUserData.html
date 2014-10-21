@@ -29,33 +29,9 @@
             </div>
 
         <div style="text-align:center">
-            <button type="submit" class="button normalButton" ><span class="buttonFont">Confirm</span></button>
+            <button type="submit" class="button normalButton"style="margin-top:250px" ><span class="buttonFont">Confirm</span></button>
         </div>
       </form>
-    
-
-    <!-- collect bank account information -->    
-    
-    <div ng-show="addData.shovler">
-      <form ng-submit="updateBank()">
-          <div class="list">
-
-            <label class="item item-input">
-                <input type="number"  placeholder="Bank Account #" ng-model="bank.account">
-            </label>
-
-            <label class="item item-input">
-                <input type="number" placeholder="Routing #" ng-model="bank.routing">
-            </label>
-            
-          </div>
-          
-          <div>
-              <button type="submit" class="button normalButton"><span class="buttonFont">Confirm</span></button>
-          </div>
-      
-      </form>
-    </div>
 
   </ion-content>
 </ion-view>
