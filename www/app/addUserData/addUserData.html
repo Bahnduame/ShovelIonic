@@ -5,6 +5,7 @@
   <ion-content has-header="true">
 
     <h3>Hi, {{username}} could we get a little more info?</h3>
+
     <form ng-submit="updateUser()">
 
         <div class="list">
@@ -24,14 +25,36 @@
              I want to Shovel
             </div>
 
-        </div>
-
-
-        <div>
+            <div>
             <button type="submit" class="button normalButton"><span class="buttonFont">Confirm</span></button>
         </div>
 
-    </form>
+        </div>
+      </form>
+    
+
+    <!-- collect bank account information -->    
+    
+    <div ng-show="addData.shovler">
+      <form ng-submit="updateBank()">
+          <div class="list">
+
+            <label class="item item-input">
+                <input type="number"  placeholder="Bank Account #" ng-model="bank.account">
+            </label>
+
+            <label class="item item-input">
+                <input type="number" placeholder="Routing #" ng-model="bank.routing">
+            </label>
+            
+          </div>
+          
+          <div>
+              <button type="submit" class="button normalButton"><span class="buttonFont">Confirm</span></button>
+          </div>
+      
+      </form>
+    </div>
 
   </ion-content>
 </ion-view>

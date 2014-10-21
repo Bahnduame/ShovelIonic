@@ -1,0 +1,32 @@
+<ion-view title="Confirm Payment" hide-back-button="false">
+      <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content has-header="true" has-tabs="true" padding="true">
+    Amount: {{amount}}
+
+	<div>
+	    <button class="button button-full button-outline button-positive" ng-click="goToAddress()">
+		    Address:
+		    <p>{{dataToConfirm.address.street}}
+		    <p>{{dataToConfirm.address.city}}, {{dataToConfirm.address.state}}
+		    <p>{{dataToConfirm.address.zip}}
+	    </button>
+	</div>
+
+	<div>
+		<button class="button button-full button-outline button-positive" ng-click="goToStripe()">
+			Payment Information:
+			Brand: {{brand}}
+			Last 4: {{last}}
+		</button>
+	</div>
+
+
+	<div>
+
+	</div>
+
+    <button class="button normalButton" ng-click="confirm()"><span class="buttonFont">Confirm</span></button>
+  </ion-content>
+</ion-view>
