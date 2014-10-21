@@ -1,7 +1,7 @@
 angular.module('starter')
 .controller('ShovlerConfirmCtrl',function($scope,$http, $state, $firebase, userData,apptData){
         $scope.appt=apptData.getAppointmentData();
-        $scope.appt.status="accepted"
+        $scope.appt.status="accepted";
         console.log("appt data confirm :",$scope.appt);
         var apptID;
 
