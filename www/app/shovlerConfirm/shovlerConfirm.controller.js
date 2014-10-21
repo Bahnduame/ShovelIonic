@@ -1,8 +1,12 @@
 angular.module('starter')
 .controller('ShovlerConfirmCtrl',function($scope,$http, $state, $firebase, userData,apptData){
+
+        apptData.setShovlerID(userData.getID());
+        apptData.setShovler(userData.getName());
         $scope.appt=apptData.getAppointmentData();
         $scope.appt.status="accepted";
         console.log("appt data confirm :",$scope.appt);
+        console.log("client ID :",apptData.getClientID())
         var apptID;
 
         $scope.marker = [];
@@ -25,12 +29,11 @@ angular.module('starter')
         $scope.acceptJob = function(){
             console.log("phone :",userData.getPhone())
             console.log("client name :",apptData.getClient())
-            console.log("name :",userData.getName())
-            apptData.setShovlerID(userData.getID());
-            apptData.setShovler(userData.getName());
+            console.log("name :",userData.getName());
             apptID = apptData.getID();
+
             $http.post(paulServer+'/job',{phone:userData.getPhone(),shovlerName:userData.getName(), clientName: apptData.getClient(), status:"accepted"}).success(function(obj){
-                   ref.child('appointments').child(apptID).update({status:"accepted"},$scope.addApptToShovler()
+                   ref.child('appointments').child(apptID).update($scope.appt,$scope.addApptToShovler()
                     );
             });
         };
