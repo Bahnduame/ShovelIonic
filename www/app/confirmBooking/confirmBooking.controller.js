@@ -38,7 +38,7 @@ angular.module('starter')
       app.apptID=appointment.path.o[1];
 
       //upon successful push to firebase, push apptID and status to user table as well
-      ref.child('users').child(userData.getID()).child('appointments').child(app.apptID).push(app, function(){
+      ref.child('users').child(userData.getID()).child('appointments').child(app.apptID).update(app, function(){
           $state.go('app.waiting');
       });
     });
