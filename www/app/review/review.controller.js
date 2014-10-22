@@ -1,13 +1,17 @@
 angular.module('starter')
-.controller('ReviewCtrl',function($rootScope, $scope,$firebaseSimpleLogin, $state){
+.controller('ReviewCtrl',function($rootScope, $scope,$firebaseSimpleLogin, $state, $timeout){
   $scope.auth = $firebaseSimpleLogin(ref);
-  $scope.submitReview = function(){
-    var review = {};
-    review.body= $scope.review.body;
-    // review.rating = $scope.review.rating;
+  $scope.shows = [{val: false}, {val: false}, {val: false}, {val: false}, {val: false}];
+
+  $scope.submitReview = function(index){
+  	for (var i = 0; i < index+1; i++){
+  		$scope.shows[i].val = true;
+  	}
+
+    	$timeout(function(){
+    		$scope.auth.$logout();
+    	}, 2000);
+
   };
 
-  $scope.logout = function() {
-    $scope.auth.$logout();
-  };
 });

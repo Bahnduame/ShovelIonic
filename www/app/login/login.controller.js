@@ -111,7 +111,7 @@ angular.module('starter')
     // window.cookies.clear(function() {
     //     console.log("Cookies cleared!");
     // });
-
+    console.log("logout event listener hit")
     $state.go('login');
   });
 

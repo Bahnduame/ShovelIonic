@@ -3,16 +3,17 @@
   </ion-nav-buttons>
   <ion-content has-header="true" has-tabs="true" padding="true">
 
-  <h5 class="headerText">Please take a moment to review your shoveler. Thank you!</h5>
+  <h5 class="headerText">Please take a moment to review your shoveler. <p>Thank you!</h5>
 
     <div class="center">
           <div class="review">
   
                   <!-- 5 snowflakes -->
-                  <!-- <span ng-repeat="show in shows">
-                  <span class="ion-ios7-snowy inactive" ng-show=><span class="ion-ios7-snowy icon"></span>
-                  </span> -->
-                  
+                  <span ng-repeat="show in shows">
+                  <span class="ion-ios7-snowy inactive" ng-hide="show.val" ng-click="submitReview($index)"></span>
+                  <span class="ion-ios7-snowy icon" ng-show="show.val"></span>
+                  </span>
+
               </div>
     </div>
 
