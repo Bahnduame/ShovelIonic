@@ -29,9 +29,14 @@ angular.module('starter', ['ionic','firebase','starter.controllers','ngCordova',
       templateUrl: 'app/login/login.html',
       controller: 'LoginCtrl'
     })
-        .state('addUserData', {
+    .state('addUserData', {
       url: '/addUserData',
       templateUrl: 'app/addUserData/addUserData.html',
+      controller: 'AddUserDataCtrl'
+    })
+    .state('addBankInfo', {
+      url: '/addBankInfo',
+      templateUrl: 'app/addUserData/addBankInfo.html',
       controller: 'AddUserDataCtrl'
     })
 /////////////////////////////////////////////////

@@ -1,17 +1,17 @@
 angular.module('starter')
 .controller('AddUserDataCtrl',function($rootScope, $scope, $firebaseSimpleLogin, $window, $state, userData){
-  
+
   $window.Stripe.setPublishableKey('pk_test_YrwJF0909Ps1AGMJpYGlYd6J');
   //var declaration
   $scope.addData = {}
   $scope.username = userData.getName();
   $scope.bank = {};
-  
+
 
   // update user information (email, phone)
   $scope.updateUser = function(){
     console.log("userId at updateUser : ",userData.getID());
-      
+
       // take updated User Data
       userData.setPhone($scope.addData.phone);
       if($scope.addData.shovler=== undefined){
@@ -23,7 +23,7 @@ angular.module('starter')
         .update({"phone": $scope.addData.phone, "email":$scope.addData.email, "shovler":$scope.addData.shovler}, function(){
               if($scope.addData.shovler){
                   ref.child('shovlers').push({"phone": $scope.addData.phone, "email":$scope.addData.email, "name":$scope.username},function(){
-                        $state.go('app.shovlerDashboard');
+                        $state.go('addBankInfo');
                   });
               }else{
                 $state.go('app.address');
@@ -50,7 +50,7 @@ angular.module('starter')
                         $state.go('app.shovlerDashboard');
                   });
 
-            
+
         });
     }
 
