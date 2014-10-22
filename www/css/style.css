@@ -162,6 +162,12 @@
   color: #6599FF;
 }
 
+.inactive{
+  padding:0px 10px 0px 10px;
+  font-size: 4.0em;
+  color: gray;
+}
+
 .review{
   margin-top: 100px;
 }
