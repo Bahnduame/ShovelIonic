@@ -8,12 +8,13 @@ angular.module('starter')
             console.log("in login function");
 
             auth.$login(provider, {rememberMe: true, scope: "email"}).then(function(userOAuthData){
-
+                console.log("1");                
                 var tpUser = userOAuthData.thirdPartyUserData;
                 userData.setID(userOAuthData.uid);
                 userID=userOAuthData.uid;
                 // grabs user info from firebase
                 ref.child('users').child(userOAuthData.uid).once('value',function(snapshot){
+                    console.log("2");
                     user = snapshot.val();
 
                     //update user in Firebase, but not email or name if they exist
@@ -34,6 +35,7 @@ angular.module('starter')
                         userData.setPhone(user.phone);
                     }
                     ref.child('users').child(userOAuthData.uid).update(updatedUserData);
+                    console.log("3");
 
                     var acceptedAndShovler = function(status, isShovler){
                         return (status === 'accepted' && isShovler);
@@ -56,6 +58,7 @@ angular.module('starter')
                         }
 
                     }else{
+                            console.log("4");
                             if(user && user.type === 'shovler'){
                                 $state.go('app.shovlerDashboard');
                             }
