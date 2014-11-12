@@ -42,8 +42,9 @@ angular.module('starter')
       var lat  = position.coords.latitude;
       var longi = position.coords.longitude;
       var latlng = "lat="+lat+'&lon='+longi;
-        $http.jsonp('http://api.openweathermap.org/data/2.5/weather?'+latlng+'&units=imperial&callback=JSON_CALLBACK').success(function(data) {
+        $http.jsonp('http://api.openweathermap.org/data/2.5/weather?'+latlng+'&units=metric&callback=JSON_CALLBACK').success(function(data) {
             if (data) {
+                console.log(data);
                 if (data.main) {
                     $scope.weather.temp.current = data.main.temp;
                     $scope.weather.temp.min = data.main.temp_min;
