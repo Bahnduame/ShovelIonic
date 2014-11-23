@@ -17,7 +17,7 @@ angular.module('starter')
           console.log("token",token);
 
           // now send it to express server for processing
-          $http.post(paulServer+'/', {stripeToken: token, userId: userData.getID()})
+          $http.post(paulServer, {stripeToken: token, userId: userData.getID()})
             .success(function(data,status,headers,config){
 
               //on successful update return to confirm booking page

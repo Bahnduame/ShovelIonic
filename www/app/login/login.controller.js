@@ -12,6 +12,7 @@ angular.module('starter')
                 var tpUser = userOAuthData.thirdPartyUserData;
                 userData.setID(userOAuthData.uid);
                 userID=userOAuthData.uid;
+                
                 // grabs user info from firebase
                 ref.child('users').child(userOAuthData.uid).once('value',function(snapshot){
                     console.log("2");

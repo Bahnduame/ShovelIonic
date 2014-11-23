@@ -1,5 +1,5 @@
 var ref = new Firebase("https://blazing-inferno-9634.firebaseio.com/");
-var paulServer = 'https://oxnvuxvvre.localtunnel.me';
+var paulServer = 'http://stripeServer-env-bry9h4mic4.elasticbeanstalk.com';
 // Ionic Starter App
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
