@@ -1,6 +1,7 @@
 angular.module('starter')
 .factory('apptData', function(){
-    var booking = { client: '',
+    var booking = { 
+                    client: '',
                     clientID:'',
                     clientPhone:'',
                     address: {},
@@ -8,7 +9,8 @@ angular.module('starter')
                     shovlerID: '',
                     status:'',
                     id:''
-                    };
+                };
+                
     return{
          setClientID: function(id){
             booking.clientID = id;
