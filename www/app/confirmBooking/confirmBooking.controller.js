@@ -6,14 +6,22 @@ angular.module('starter')
   
   // set dataToConfirm = appt data for viewing
   $scope.dataToConfirm = apptData.getAppointmentData();
-  console.log($scope.dataToConfirm)
+  console.log($scope.dataToConfirm);
 
-  // check if user has stored cc information, if yes get the brand & last 4 digits
-  $http.get(paulServer+'/'+userData.getID()).success(function(obj){
-    $scope.last = obj.last;
-    $scope.brand = obj.brand;
-  });
+  // check if they've entered cc info before
+  $scope.doWeHaveCCInfo = function(){
+    var ccInfo = userData.getCCInfo();
+    console.log('ccinfo: ', ccInfo);
 
+    if (ccInfo){
+      $scope.last = ccInfo.lastFour;
+      $scope.brand = ccInfo.brand;
+      return true;
+    }
+
+    return false;
+  }
+  
 
   // sends user to add/change credit card information
   $scope.goToStripe = function(){
@@ -51,4 +59,5 @@ angular.module('starter')
 
     });
   }
+
 });

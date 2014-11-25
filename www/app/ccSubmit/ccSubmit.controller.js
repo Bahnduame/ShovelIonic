@@ -10,7 +10,9 @@ angular.module('starter')
         if(response.error) {
           console.log("error: " + response.error)
 
-        } else {
+        } 
+
+        else {
           // customer token is returned by Stripe
           console.log("in else: ", paulServer);
           var token = response.id;
@@ -19,12 +21,15 @@ angular.module('starter')
           // now send it to express server for processing
           $http.post(paulServer, {stripeToken: token, userId: userData.getID()})
             .success(function(data,status,headers,config){
+              console.log('data: ', data);
 
-              //on successful update return to confirm booking page
+              //on successful update return, store cc info locally and send back to confirm booking page
+              userData.setCCInfo(data);
               $state.go('app.confirmBooking')
-            }).error(function(data,status){
-              console.log("data :"+data);
-              console.log("staus :"+status);
+
+            }).error(function(data, status){
+              console.log("data: " + data);
+              console.log("staus: " + status);
             });
         }
     }

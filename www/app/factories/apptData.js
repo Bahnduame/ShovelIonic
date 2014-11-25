@@ -1,14 +1,14 @@
 angular.module('starter')
 .factory('apptData', function(){
     var booking = { 
+                    id: '',
                     client: '',
                     clientID:'',
                     clientPhone:'',
                     address: {},
                     shovler: '',
                     shovlerID: '',
-                    status:'',
-                    id:''
+                    status:''
                 };
                 
     return{
