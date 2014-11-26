@@ -24,7 +24,7 @@ angular.module('starter')
 	};
 
 	//get location and  populate address fields with best guess from google
-       usSpinnerService.spin('spinner-1');    		
+      usSpinnerService.spin('spinner-1');    		
 	$cordovaGeolocation
 	      .getCurrentPosition()
 	      .then(function (position) {
