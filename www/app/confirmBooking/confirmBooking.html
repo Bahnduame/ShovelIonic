@@ -13,8 +13,9 @@
                 </div>
 
                 <div class="col col-60 col-top confirm addr">
-          		    <p>{{dataToConfirm.address.street}}<br>
-          		    {{dataToConfirm.address.city}}, {{dataToConfirm.address.state}}<br>
+          		    <p>
+                      {{dataToConfirm.address.street}}<br>
+          		      {{dataToConfirm.address.city}}, {{dataToConfirm.address.state}}<br>
         		      {{dataToConfirm.address.zip}}<br>
                 </div>
 
@@ -32,13 +33,15 @@
                   <p>PAYMENT:</p>
                 </div>
 
-                <div class="col col-15 col-top confirm">
-                  <span>{{brand}}</span>
+                <!-- If we have cc info -->
+                <div ng-show="doWeHaveCCInfo()" class="col col-60 col-top confirm addr">
+                  <p>{{brand}}<br>
+                  **** **** **** {{last}}<br>
                 </div>
 
-                <div class="col col-45 col-top confirm">
-                  <span>last four: {{last}}</span>
-
+                <!-- if we don't have cc info -->
+                <div ng-hide="doWeHaveCCInfo()" class="col col-60 col-top confirm addr">
+                  <p>Click here to enter payment information<br>
                 </div>
 
                 <div class="col col-10 col-center confirm">
