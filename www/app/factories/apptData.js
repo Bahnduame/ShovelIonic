@@ -10,6 +10,12 @@ angular.module('starter')
                     shovlerID: '',
                     status:''
                 };
+
+                // client id, name
+                // shoveler id, name
+                // status
+                // address
+                // id
                 
     return{
          setClientID: function(id){

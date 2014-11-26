@@ -11,7 +11,6 @@ angular.module('starter')
   // check if they've entered cc info before
   $scope.doWeHaveCCInfo = function(){
     var ccInfo = userData.getCCInfo();
-    console.log('ccinfo: ', ccInfo);
 
     if (ccInfo){
       $scope.last = ccInfo.lastFour;
@@ -36,6 +35,9 @@ angular.module('starter')
 
   // confirm the appt
   $scope.confirm = function(){
+
+    // set status in userData & apptData
+
 
     //change status of appt to booked
     apptData.setStatus("booked");
