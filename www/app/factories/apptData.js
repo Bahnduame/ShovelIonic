@@ -1,14 +1,14 @@
 angular.module('starter')
 .factory('apptData', function(){
     var booking = { 
-                    id: '',
                     client: '',
                     clientID:'',
                     clientPhone:'',
                     address: {},
                     shovler: '',
                     shovlerID: '',
-                    status:''
+                    status:'',
+                    date: ''
                 };
 
                 // client id, name
@@ -16,6 +16,7 @@ angular.module('starter')
                 // status
                 // address
                 // id
+                // date
                 
     return{
          setClientID: function(id){
@@ -71,6 +72,12 @@ angular.module('starter')
         },
         setAppointmentData: function(apptData){
             booking=apptData;
+        },
+        setDate: function(date){
+            booking.date = date;
+        },
+        getDate: function(){
+            return booking.date;
         }
     }
 })

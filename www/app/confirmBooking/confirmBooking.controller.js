@@ -6,7 +6,6 @@ angular.module('starter')
   
   // set dataToConfirm = appt data for viewing
   $scope.dataToConfirm = apptData.getAppointmentData();
-  console.log($scope.dataToConfirm);
 
   // check if they've entered cc info before
   $scope.doWeHaveCCInfo = function(){
@@ -35,31 +34,51 @@ angular.module('starter')
 
   // confirm the appt
   $scope.confirm = function(){
+    console.log('cc ', $scope.doWeHaveCCInfo());
 
-    // set status in userData & apptData
+    // check if they entered credit card information
+    if (!$scope.doWeHaveCCInfo()){    
+        $scope.goToStripe();
+    }
 
+    else{
+        // set status
+        apptData.setStatus('booked');
 
-    //change status of appt to booked
-    apptData.setStatus("booked");
+        // set date
+        var d = new Date();
+        apptData.setDate(d);
 
-    // get all the data from the apptData factory
-    var appt = apptData.getAppointmentData();
+        // set client (current user)
+        apptData.setClient(userData.getName());
+        apptData.setClientID(userData.getID());
 
-    console.log("appt data", appt);
-    
-    //push appt to firebase
-    var appointment = ref.child('appointments').push(appt, function(data){
+        // get all the data from the apptData factory to insert into Firebase
+        var appt = apptData.getAppointmentData();
 
-      var app = appt;
-      console.log(appointment);
-      app.apptID = appointment.path.o[1];
+        //push appt to Firebase, Firebase will give it a uniqueID
+        var appointment = ref.child('appointments').push(appt, function(err){
 
-      //upon successful push to firebase, push apptID and status to user table as well
-      ref.child('users').child(userData.getID()).child('appointments').child(app.apptID).update(app, function(){
-          $state.go('app.waiting');
-      });
+          if (err) console.log(err);
 
-    });
+          var key = appointment.key();
+
+          //upon successful push to firebase, push apptID and status to user table as well
+          var userApptObj = {
+            id: key,
+            status: 'booked'
+          };
+
+          ref.child('users').child(userData.getID()).child('currentAppt').set(userApptObj, function(){
+              console.log('waiting');
+              $state.go('app.waiting');
+          });
+
+        });
+    }
   }
 
 });
+
+
+// booked(1), enroute(2), in-progress(3), completed (0)
