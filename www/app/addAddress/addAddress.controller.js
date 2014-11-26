@@ -4,7 +4,14 @@ angular.module('starter')
 	//$cordovaStatusbar.overlaysWebView(false);
 	// StatusBar.overlaysWebView(false);
 
-	$scope.address = {};
+	$scope.address = {
+	      'street_number': '',
+		'route': '',
+		'locality': '',
+		'administrative_area_level_1': '',
+		'postal_code': '',
+		'streetAddr': ''
+  	};
 
 	$scope.logout = function() {
 		$scope.loginObj.$logout();
@@ -30,13 +37,17 @@ angular.module('starter')
 	        var url = 'https://maps.googleapis.com/maps/api/geocode/json' + '?latlng=' + latlng + '&key=' + key;
 	    
 	        $http.get(url).success(function(data){
-	        		console.log(data);
-	          	$scope.address.street = data.results[0].address_components[0].long_name + " " + data.results[0].address_components[1].long_name;
-	          	$scope.address.city = data.results[0].address_components[4].long_name;
-	          	$scope.address.state = data.results[0].address_components[6].short_name;
-	          	$scope.address.zip = data.results[0].address_components[8].long_name;
-	          	$scope.address.lat = lat;
-	          	$scope.address.lon =longi;
+        		console.log('address: ', data);
+
+        		var addrArr = data.results[0].address_components;
+
+        		for (var i = 0; i < addrArr.length; i++)
+        			for (key in $scope.address)
+        				if (addrArr[i].types.indexOf(key) != -1)
+        					$scope.address[key] = (key === 'administrative_area_level_1' ? addrArr[i].short_name : addrArr[i].long_name);
+        				
+        		$scope.address.streetAddr = $scope.address.street_number + ' ' + $scope.address.route;
+
         		usSpinnerService.stop('spinner-1');
 
 	        });
