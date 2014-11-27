@@ -1,20 +1,28 @@
 angular.module('starter')
 .factory('userData', function(){
     var data = {
-            uid:'',
+            id:'',
             name:'',
-            phone: 0,
+            phone: '',
             email: '',
             status: 'none',
-            ccInfo: null
+            ccInfo: null,
+            type: ''
     };
 
     return{
+
+        setProperty: function(key, val){
+            data[key] = val;
+        },
+        getProperty: function(key){
+            return data[key];
+        },
         getID: function(){
-            return data.uid;
+            return data.id;
         },
         setID: function(id){
-            data.uid=id;
+            data.id=id;
         },
         getName: function(){
             return data.name;

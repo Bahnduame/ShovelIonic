@@ -1,36 +1,65 @@
 angular.module('starter')
-.controller('AddUserDataCtrl',function($rootScope, $scope, $firebaseSimpleLogin, $window, $state, userData){
+.controller('AddUserDataCtrl',function($rootScope, $scope, $window, $state, userData){
 
   $window.Stripe.setPublishableKey('pk_test_YrwJF0909Ps1AGMJpYGlYd6J');
+  
   //var declaration
-  $scope.addData = {}
-  $scope.username = userData.getName();
+  $scope.addData = userData.getUserData();
   $scope.bank = {};
+  
+
+  // validate the text boxes
+  var validate = function(){
+
+  }
+
+
+  // pop up an error msg if they fields are not filled in
+  var popUpMsg = function(){
+
+  }
+
+
+  var updateUserData = function(){
+      for (key in $scope.addData)
+        userData.setProperty(key, $scope.addData[key]);
+  }
+
+
+  var createFirebaseObj = function(){
+      var newObj = {
+        name: '',
+        phone: '',
+        email: ''
+      };
+
+      for (key in newObj)
+        newObj[key] = $scope.addData[key];
+
+      return newObj;
+  }
 
 
   // update user information (email, phone)
   $scope.updateUser = function(){
-    console.log("userId at updateUser : ",userData.getID());
 
-      // take updated User Data
-      userData.setPhone($scope.addData.phone);
-      if($scope.addData.shovler=== undefined){
-        $scope.addData.shovler=false;
-      }
+      // validation - if not pop up modal with what they are missing
+      //validate();
 
-      // update phone and email fields to firebase
-      ref.child('users').child(userData.getID())
-        .update({"phone": $scope.addData.phone, "email":$scope.addData.email, "shovler":$scope.addData.shovler}, function(){
-              if($scope.addData.shovler){
-                  ref.child('shovlers').push({"phone": $scope.addData.phone, "email":$scope.addData.email, "name":$scope.username},function(){
-                        $state.go('addBankInfo');
-                  });
-              }else{
-                $state.go('app.address');
-              }
-        });
+      // update userData
+      updateUserData();
+      
+      //create obj to insert into Firebase
+      var newData = createFirebaseObj();
 
-    };
+      ref.child(userData.getProperty('type')).child(userData.getID()).set(newData);
+
+      if (userData.getProperty('type') === 'user')      
+        $state.go('app.services');
+
+      // do something if its a worker
+
+  };
 
 
     // get stripe token for bank account information
@@ -48,10 +77,8 @@ angular.module('starter')
 
              ref.child('user').push({"phone": $scope.addData.phone, "email":$scope.addData.email, "name":$scope.username},function(){
                         $state.go('app.shovlerDashboard');
-                  });
-
-
-        });
+              });
+            });
     }
 
 });
