@@ -21,11 +21,20 @@
                 <input type="tel" placeholder="Phone Number" ng-model="addData.phone">
             </label>
 
-            <div class="item item-checkbox borderless">
-             <label class="checkbox">
-               <input type="checkbox" ng-model= "addData.shovler">
-             </label>
-             <p>I want to Shovel</p>
+            <!-- <div class="item item-checkbox borderless"> -->
+
+            <div>
+              <label class="item item-radio"> 
+                <ion-radio ng-model='addData.type' ng-value=" 'user' ">
+                    I want my driveway shoveled
+                </ion-radio>
+              </label>
+
+                <label class="item item-radio"> 
+                <ion-radio ng-model='addData.type' ng-value=" 'worker' ">
+                    I want to shovel driveways  
+                </ion-radio>
+              </label>
             </div>
 
         <div style="text-align:center">
