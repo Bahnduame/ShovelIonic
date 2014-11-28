@@ -1,8 +1,6 @@
 angular.module('starter')
     .controller('LoginCtrl', function($rootScope, $scope, $firebase, $state, userData, apptData) {
 
-        var counter = 0;
-
         //update userData with Firebase data
         var updateUserData = function(userFirebaseData){
 
@@ -23,13 +21,11 @@ angular.module('starter')
             
             return userObj[authData.uid];
         };
-
-
-
-
+        
  
         // When user clicks login
         $scope.login = function(provider) {
+            var counter = 0;
             var userOAuthData;
             var newUser = false;
 
@@ -42,8 +38,7 @@ angular.module('starter')
                     // set userID in factory
                     userData.setID(authData.uid);
 
-
-
+                    // checks if user exists in Firebase, both user and worker collections
                     var exist = function(){
                         var userObj = null;
 
@@ -66,7 +61,7 @@ angular.module('starter')
                         });
                     }
 
-
+                    // redirects the user, depending on new user, worker, or user
                     var redirect = function(userObj){
                          var newUser = false;
 
@@ -103,36 +98,6 @@ angular.module('starter')
                          }
                     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    
                     // check if the user exists in Firebase
                     exist();
                 }
