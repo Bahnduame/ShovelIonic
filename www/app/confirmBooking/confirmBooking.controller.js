@@ -32,6 +32,20 @@ angular.module('starter')
   };
 
 
+  var updateApptData = function(){
+    // set status
+    apptData.setStatus('booked');
+
+    // set date
+    var d = new Date();
+    apptData.setDate(d);
+
+    // set client (current user)
+    apptData.setClient(userData.getName());
+    apptData.setClientID(userData.getID());    
+  }
+
+
   // confirm the appt
   $scope.confirm = function(){
     console.log('cc ', $scope.doWeHaveCCInfo());
@@ -42,16 +56,8 @@ angular.module('starter')
     }
 
     else{
-        // set status
-        apptData.setStatus('booked');
-
-        // set date
-        var d = new Date();
-        apptData.setDate(d);
-
-        // set client (current user)
-        apptData.setClient(userData.getName());
-        apptData.setClientID(userData.getID());
+        
+        updateApptData();
 
         // get all the data from the apptData factory to insert into Firebase
         var appt = apptData.getAppointmentData();
@@ -69,7 +75,7 @@ angular.module('starter')
             status: 'booked'
           };
 
-          ref.child('users').child(userData.getID()).child('currentAppt').set(userApptObj, function(){
+          ref.child('user').child(userData.getID()).child('currentAppt').set(userApptObj, function(){
               console.log('waiting');
               $state.go('app.waiting');
           });
