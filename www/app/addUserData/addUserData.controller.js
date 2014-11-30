@@ -52,33 +52,43 @@ angular.module('starter')
       //create obj to insert into Firebase
       var newData = createFirebaseObj();
 
-      ref.child(userData.getProperty('type')).child(userData.getID()).set(newData);
+      ref.child(userData.getProperty('type')).child(userData.getID()).set(newData, function(err){
+        
+        if (err) console.log(err);
 
-      if (userData.getProperty('type') === 'user')      
-        $state.go('app.services');
+        if (userData.getProperty('type') === 'user')      
+          $state.go('app.services');
 
-      // do something if its a worker
-
+        // do something if its a worker
+        if (userData.getProperty('type') === 'worker')
+          $state.go('addBankInfo');
+        
+      });
   };
 
 
     // get stripe token for bank account information
     $scope.updateBank = function(){
+        console.log('routing', $scope.bank.routing.toString());
+        console.log('account', $scope.bank.account);
 
         // create token
         Stripe.bankAccount.createToken({
           country: 'US',
           routingNumber: $scope.bank.routing,
-          accountNumber: $scope.bank.account
+          accountNumber: $scope.bank.account,
         }, function (status, response) {
 
-            // response contains id and card, which contains additional card details
-            var token = response.id;
+            var bankObj = {
+              id: response.id
+            }
 
-             ref.child('user').push({"phone": $scope.addData.phone, "email":$scope.addData.email, "name":$scope.username},function(){
-                        $state.go('app.shovlerDashboard');
-              });
+            ref.child('worker').child(userData.getID()).set(bankObj, function(err){
+                if (err) console.log(err);
+
+                $state.go('app.shovlerDashboard');
             });
+        });
     }
 
 });
