@@ -3,11 +3,17 @@
   </ion-nav-buttons>
   <ion-content has-header="true" has-tabs="true" padding="true">
 
-    <h5 class="headerText">Select a driveway to shovel</h5>
 
+    
+    <h5 ng-show="jobs" class="headerText">Select a driveway to shovel</h5>
+    
+    <div ng-hide="jobs" class="headerText noJobs">
+        <span>There are currently no jobs.  <p></p>We will notify and text you when a job becomes available.</span>
+    </div>
+    
     <!-- <ion-list>
         <ion-item  ng-repeat="appointment in appointments"> -->
-          <div ng-repeat="appointment in appointments" class="total">
+          <div ng-show="jobs" ng-repeat="appointment in appointments" class="total">
               <div ng-click="checkRequest(appointment)">
                     <div class="row">
                         <div class="col col-40 col-top confirm title">
