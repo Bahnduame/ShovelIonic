@@ -1,11 +1,16 @@
 angular.module('starter')
-.controller('AddUserDataCtrl',function($rootScope, $scope, $window, $state, userData){
+.controller('AddUserDataCtrl',function($rootScope, $scope, $window, $state, userData, $http){
 
   $window.Stripe.setPublishableKey('pk_test_YrwJF0909Ps1AGMJpYGlYd6J');
   
   //var declaration
   $scope.addData = userData.getUserData();
-  $scope.bank = {};
+  $scope.bank = {
+    id: userData.getID(),
+    name: '',
+    account: '',
+    routing: ''
+  };
   
 
   // validate the text boxes
@@ -71,6 +76,9 @@ angular.module('starter')
     $scope.updateBank = function(){
         console.log('routing', $scope.bank.routing.toString());
         console.log('account', $scope.bank.account);
+        console.log('name', $scope.bank.name);
+
+
 
         // create token
         Stripe.bankAccount.createToken({
@@ -80,13 +88,7 @@ angular.module('starter')
         }, function (status, response) {
 
             // send stripe token to server, store Stripe recipient 
-            $http.post(paulServer + 'bank', {stripeToken: response.id, userId: userData.getID()});
-
-            // ref.child('worker').child(userData.getID()).set(bankObj, function(err){
-            //     if (err) console.log(err);
-
-            //     $state.go('app.shovlerDashboard');
-            // });
+            $http.post(paulServer + 'bank', $scope.bank);
         });
     }
 
