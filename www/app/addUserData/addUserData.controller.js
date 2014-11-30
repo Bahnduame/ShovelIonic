@@ -79,15 +79,14 @@ angular.module('starter')
           accountNumber: $scope.bank.account,
         }, function (status, response) {
 
-            var bankObj = {
-              id: response.id
-            }
+            // send stripe token to server, store Stripe recipient 
+            $http.post(paulServer + 'bank', {stripeToken: response.id, userId: userData.getID()});
 
-            ref.child('worker').child(userData.getID()).set(bankObj, function(err){
-                if (err) console.log(err);
+            // ref.child('worker').child(userData.getID()).set(bankObj, function(err){
+            //     if (err) console.log(err);
 
-                $state.go('app.shovlerDashboard');
-            });
+            //     $state.go('app.shovlerDashboard');
+            // });
         });
     }
 
