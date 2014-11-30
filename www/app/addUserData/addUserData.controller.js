@@ -74,22 +74,12 @@ angular.module('starter')
 
     // get stripe token for bank account information
     $scope.updateBank = function(){
-        console.log('routing', $scope.bank.routing.toString());
-        console.log('account', $scope.bank.account);
-        console.log('name', $scope.bank.name);
 
+      // send bank info server, create/store Stripe recipient
+      $http.post(paulServer + 'bank', $scope.bank);
 
-
-        // create token
-        Stripe.bankAccount.createToken({
-          country: 'US',
-          routingNumber: $scope.bank.routing,
-          accountNumber: $scope.bank.account,
-        }, function (status, response) {
-
-            // send stripe token to server, store Stripe recipient 
-            $http.post(paulServer + 'bank', $scope.bank);
-        });
+      $state.go('app.shovlerDashboard');
+        
     }
 
 });

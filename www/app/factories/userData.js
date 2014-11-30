@@ -7,7 +7,8 @@ angular.module('starter')
             email: '',
             status: 'none',
             ccInfo: null,
-            type: ''
+            type: '',
+            recipientID: ''
     };
 
     return{

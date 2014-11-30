@@ -85,14 +85,31 @@ angular.module('starter')
                                 var typeVal = (counter === 1 ? 'user' : 'worker');
                                 userData.setProperty('type', typeVal);
                                 
-                                // if apptStatus is set to true, then send straight to payment page
-                                if (userData.getStatus() === 'completed')
-                                    console.log('in if');
+                                // if worker and do not have recipient id, send to bank account page
+                                if (userData.getProperty('type') === 'worker'){
 
-                                // else, go to the weather page where you can book an appointment
+                                    // if worker does not have a recipient id
+                                    if (userData.getProperty('recipientID') === '')
+                                        $state.go('addBankInfo');
+                                    
+                                    // if worker has a recipient id
+                                    else
+                                        $state.go('app.shovlerDashboard');
+                                }
+
+                                // else if you are a user
                                 else{
-                                    console.log('data ', userData.getUserData());
-                                    $state.go('app.services');
+                                
+                                    // if apptStatus is set to true, then send straight to payment page
+                                    if (userData.getStatus() === 'completed')
+                                        console.log('in if');
+
+                                    // else, go to the weather page where you can book an appointment
+                                    else{
+                                        console.log('data ', userData.getUserData());
+                                        $state.go('app.services');
+                                    }
+
                                 }
                             }
                          }
