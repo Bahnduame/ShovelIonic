@@ -1,6 +1,11 @@
 angular.module('starter')
 .controller('ShovlerDashboardCtrl',function($scope, $state, userData, apptData){
     $scope.appointments= {};
+    $scope.available = userData.getProperty('available');
+
+    // listen to changes in available, if it changes modify it in Firebase
+    
+
     ref.child('appointments').on('value',function(snapshot){
         var allAppointments = snapshot.val();
         console.log(allAppointments)
