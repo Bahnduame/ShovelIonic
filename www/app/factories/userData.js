@@ -8,7 +8,8 @@ angular.module('starter')
             status: 'none',
             ccInfo: null,
             type: '',
-            recipientID: ''
+            recipientID: '',
+            available: ''
     };
 
     return{
