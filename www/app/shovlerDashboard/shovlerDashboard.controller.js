@@ -1,10 +1,28 @@
 angular.module('starter')
-.controller('ShovlerDashboardCtrl',function($scope, $state, userData, apptData){
+.controller('ShovlerDashboardCtrl',function($scope, $state, userData, apptData, usSpinnerService){
     $scope.appointments= {};
     $scope.available = userData.getProperty('available');
 
-    // listen to changes in available, if it changes modify it in Firebase
-    
+    // listen to changes in available, if it changes modify it in Firebase    
+    var updateAvailable = function(){
+        usSpinnerService.spin('spinner-1');   
+
+        availableObj = {
+            available: $scope.available;
+        }
+
+        ref.child('worker').child(userData.getID()).update(availableObj, function(err){
+            usSpinnerService.stop('spinner-1');
+        });
+    }
+
+
+    $scope.$watch($scope.available, function() { 
+        updateAvailable();
+    }, true);
+
+
+
 
     ref.child('appointments').on('value',function(snapshot){
         var allAppointments = snapshot.val();
