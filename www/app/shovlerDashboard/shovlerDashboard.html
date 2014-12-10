@@ -3,8 +3,9 @@
   </ion-nav-buttons>
   <ion-content has-header="true" has-tabs="true" padding="true">
 
-    <ion-toggle ng-model="available" toggle-class="toggle">Available</ion-toggle>
-    
+    <ion-toggle ng-model="available.value" toggle-class="toggle">Available</ion-toggle>
+
+
     <h5 ng-show="jobs" class="headerText">Select a driveway to shovel</h5>
     
     <div ng-hide="jobs" class="headerText noJobs">
@@ -32,9 +33,6 @@
                     </div>
               </div>
           </div>
-
-
-
 
         </ion-item>
     </ion-list>
